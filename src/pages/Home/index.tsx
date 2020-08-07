@@ -1,22 +1,19 @@
 import React, { Component } from "react";
 import * as THREE from "three";
-import Stats from "stats-js";
+// import Stats from "stats-js";
 
-export default class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      scene: null,
-      camera: null,
-      renderer: null,
-      geometry: null,
-      material: null,
-      cubeObj: null,
-      stats: null,
-    };
-  }
+interface IState {
+  scene: any;
+  camera: any;
+  renderer: any;
+  geometry: any;
+  material: any;
+  cubeObj: any;
+  // stats: any;
+}
 
-  animate() {
+export default class App extends Component<{}, IState> {
+  public animate() {
     const { cubeObj } = this.state;
     requestAnimationFrame(this.animate.bind(this));
     cubeObj.rotation.y += 0.01;
@@ -25,14 +22,14 @@ export default class App extends Component {
   }
 
   // 渲染场景
-  renderThree() {
-    const { renderer, scene, camera, stats } = this.state;
-    stats.update();
+  public renderThree() {
+    const { renderer, scene, camera } = this.state;// stats
+    // stats.update();
     renderer.render(scene, camera);
   }
 
-  initThree() {
-    const threeContainer = document.querySelector("#three-container");
+  public initThree() {
+    const threeContainer: any = document.querySelector("#three-container");
     /**
      * 创建场景
      */
@@ -57,9 +54,9 @@ export default class App extends Component {
 
     camera.position.z = 5;
 
-    const stats = new Stats();
-    stats.showPanel(0);
-    threeContainer.appendChild(stats.dom);
+    // const stats = new Stats();
+    // stats.showPanel(0);
+    // threeContainer.appendChild(stats.dom);
     threeContainer.appendChild(renderer.domElement);
 
     this.setState(
@@ -69,7 +66,7 @@ export default class App extends Component {
         renderer,
         geometry,
         material,
-        stats,
+        // stats,
         cubeObj: cube,
       },
       () => {

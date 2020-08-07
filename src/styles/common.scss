@@ -1,0 +1,33 @@
+.mt-10 {
+  margin-top: 10px;
+}
+
+.mt-20 {
+  margin-top: 20px;
+}
+
+%main-layout {
+  min-height: 100vh;
+  min-width: 100vw;
+  box-sizing: border-box;
+}
+
+%flex-layout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+%flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+%flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+#main-content {
+  @extend %main-layout;
+}

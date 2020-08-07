@@ -1,9 +1,9 @@
 /**
  * 路由渲染
  */
-import React from "react";
+import * as React from "react";
 import Routers from "./routerMap";
-import "./styles/common.css";
+import "./styles/common.scss";
 import { Switch, BrowserRouter, Route } from "react-router-dom";
 
 function App() {

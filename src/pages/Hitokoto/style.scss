@@ -1,0 +1,5 @@
+#Hitokoto {
+  @extend %main-layout;
+  @extend %flex-layout;
+  border: 5px solid red;
+}
