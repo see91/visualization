@@ -1,3 +1,8 @@
+// 色值
+$main-color: #f78326;
+$white: #ffffff;
+$black: #000000;
+
 .m-40 {
   margin: 40px;
 }
@@ -10,6 +15,7 @@
   padding: 40px;
 }
 
+// layout
 %main-layout {
   min-height: 100vh;
   min-width: 100vw;

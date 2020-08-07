@@ -8,6 +8,8 @@ interface IState {
   };
 }
 class Hitokoto extends Component<{}, {}> {
+  public timer: any = null;
+
   readonly state: IState = {
     contentData: {
       hitokoto: "",
@@ -34,6 +36,12 @@ class Hitokoto extends Component<{}, {}> {
 
   componentDidMount() {
     this._getMessage();
+    this.timer = setInterval(() => {
+      this._getMessage();
+    }, 5000);
+  }
+  componentWillUnmount() {
+    clearInterval(this.timer);
   }
 
   public render() {
