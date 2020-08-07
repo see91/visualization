@@ -43,7 +43,7 @@ module.exports = {
   },
   webpack: {
     alias: {
-      '@': path.resolve('src')
+      "@": path.resolve(__dirname, 'src')
     },
     plugins: [],
     configure: (webpackConfig, { env, paths }) => { return webpackConfig; }
