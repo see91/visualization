@@ -1,3 +1,11 @@
+/*
+ * @Author: qzw <isee_wang@outlook.com>
+ * @Date: 2020-08-06 16:38:48
+ * @LastEditTime: 2020-08-14 18:21:24
+ * @Description: 
+ * @FilePath: /visualization/src/pages/Hitokoto/index.tsx
+ * @say hello~
+ */
 import React, { Component } from "react";
 import "./style.scss";
 import { getContent } from "@/service/Hitokoto/index";

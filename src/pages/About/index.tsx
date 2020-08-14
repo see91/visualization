@@ -1,3 +1,11 @@
+/*
+ * @Author: qzw <isee_wang@outlook.com>
+ * @Date: 2020-08-03 15:20:44
+ * @LastEditTime: 2020-08-14 18:24:19
+ * @Description: 
+ * @FilePath: /visualization/src/pages/About/index.tsx
+ * @say hello~
+ */
 import React, { Component } from "react";
 import { SVG, Rect } from "@svgdotjs/svg.js";
 import "./style.scss";
@@ -131,14 +139,14 @@ export default class About extends Component<{}, IState> {
      * svg
      */
     this.initSvg(); // base svg
-    // this.animateSvg(); //svg 动画
+    this.animateSvg(); //svg 动画
 
     /**
      * canvas
      */
     const isCanvas = this.initCanvas();
     if (isCanvas) {
-      // this.drawRectangle(); // 绘图
+      this.drawRectangle(); // 绘图
       this.drawPath(); // 绘制路径
       this.drawPathAvatar();
       return;

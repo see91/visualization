@@ -1,7 +1,20 @@
+/*
+ * @Author: qzw <isee_wang@outlook.com>
+ * @Date: 2020-07-21 15:22:15
+ * @LastEditTime: 2020-08-14 18:13:14
+ * @Description:
+ * @FilePath: /visualization/src/pages/Home/index.tsx
+ * @say hello~
+ */
+
 import React, { Component } from "react";
 import * as THREE from "three";
+import Stats from "stats-js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-// import Stats from "stats-js";
+/**
+ * assets
+ */
+const sceneBg = require("../../assets/img/t.png"); // scene background
 
 interface IState {
   scene: any;
@@ -10,7 +23,8 @@ interface IState {
   geometry: any;
   material: any;
   cubeObj: any;
-  // stats: any;
+  stats: any;
+  orbitcontrol: any; // 轨道控制器
 }
 
 export default class App extends Component<{}, IState> {
@@ -24,8 +38,8 @@ export default class App extends Component<{}, IState> {
 
   // 渲染场景
   public renderThree() {
-    const { renderer, scene, camera } = this.state; // stats
-    // stats.update();
+    const { renderer, scene, camera, stats } = this.state;
+    stats.update();
     renderer.render(scene, camera);
   }
 
@@ -55,10 +69,12 @@ export default class App extends Component<{}, IState> {
 
     camera.position.z = 5;
 
-    // const stats = new Stats();
-    // stats.showPanel(0);
-    // threeContainer.appendChild(stats.dom);
+    const stats = new Stats();
+    stats.showPanel(0);
+    threeContainer.appendChild(stats.dom);
     threeContainer.appendChild(renderer.domElement);
+
+    scene.background = new THREE.TextureLoader().load(sceneBg); // 加载背景图片
 
     this.setState(
       {
@@ -67,7 +83,7 @@ export default class App extends Component<{}, IState> {
         renderer,
         geometry,
         material,
-        // stats,
+        stats,
         cubeObj: cube,
       },
       () => {
@@ -79,19 +95,11 @@ export default class App extends Component<{}, IState> {
 
   public initControl() {
     const { camera, renderer } = this.state;
-    let orbitcontrol = new OrbitControls(camera, renderer.domElement);
-    // orbitcontrol.maxPolarAngle = Math.PI * 0.5;
-    // orbitcontrol.minDistance = 300;
-    // orbitcontrol.maxDistance = 25000;
-    // // controls.target = new THREE.Vector3(0,0,0);
-    // // controls.minZoom = 0;
-    // // controls.maxZoom = 1000;
-    // // this.orbitcontrol = orbitcontrol;
-    // // this.orbitcontrol.isLocked = false;
-    // // this.controls = orbitcontrol;
-    // // this.orbitcontrol.isq = false;
-    // // this.orbitcontrol.enableKeys = false
+    const orbitcontrol = new OrbitControls(camera, renderer.domElement);
+    orbitcontrol.enableKeys = false;
+    orbitcontrol.enableRotate = false;
     orbitcontrol.update();
+    this.setState({ orbitcontrol });
   }
 
   componentDidMount() {
