@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import * as THREE from "three";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 // import Stats from "stats-js";
 
 interface IState {
@@ -23,7 +24,7 @@ export default class App extends Component<{}, IState> {
 
   // 渲染场景
   public renderThree() {
-    const { renderer, scene, camera } = this.state;// stats
+    const { renderer, scene, camera } = this.state; // stats
     // stats.update();
     renderer.render(scene, camera);
   }
@@ -70,9 +71,27 @@ export default class App extends Component<{}, IState> {
         cubeObj: cube,
       },
       () => {
+        this.initControl();
         this.animate();
       }
     );
+  }
+
+  public initControl() {
+    const { camera, renderer } = this.state;
+    let orbitcontrol = new OrbitControls(camera, renderer.domElement);
+    // orbitcontrol.maxPolarAngle = Math.PI * 0.5;
+    // orbitcontrol.minDistance = 300;
+    // orbitcontrol.maxDistance = 25000;
+    // // controls.target = new THREE.Vector3(0,0,0);
+    // // controls.minZoom = 0;
+    // // controls.maxZoom = 1000;
+    // // this.orbitcontrol = orbitcontrol;
+    // // this.orbitcontrol.isLocked = false;
+    // // this.controls = orbitcontrol;
+    // // this.orbitcontrol.isq = false;
+    // // this.orbitcontrol.enableKeys = false
+    orbitcontrol.update();
   }
 
   componentDidMount() {
