@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { SVG, Rect } from "@svgdotjs/svg.js";
 import "./style.scss";
 
 interface IState {}
@@ -67,11 +68,78 @@ export default class About extends Component<{}, IState> {
     ctx.fill();
   }
 
+  /**
+   * 初始化SVG
+   */
+  initSvg() {
+    const draw = SVG().addTo("#draw").size("50%", "50%");
+    draw.rect(100, 100).move(100, 50).fill("#f06");
+
+    const nested = draw.nested(); // svg 嵌套
+    const rect = nested.rect(50, 50);
+
+    const group = draw.group();
+    group.path("M10,20L30,40");
+    group.add(rect);
+
+    const symbol = draw.symbol();
+    symbol.rect(150, 150).fill("#f09");
+    draw.use(symbol).move(-60, 70);
+
+    const link = draw.link("http://baidu.com/");
+    link.target("_blank");
+    link.rect(100, 100);
+
+    new Rect().size(150, 20).addTo(draw).fill("#f39");
+    // var rect1 = new Rect(rect).size(100, 100);
+
+    // link.to("https://www.jd.com");
+    // rectLink.linkTo("http://baidu.com/");
+    // rectLink.linkTo(function (link) {
+    //   link.to("http://svgdotjs.github.io/").target("_blank");
+    // });
+  }
+
+  /**
+   * svg动画
+   */
+  animateSvg() {
+    var input: any = document.querySelector("input[type=text]");
+    var draw = SVG()
+      .addTo("#drawing")
+      .size("100%", "100%")
+      .viewbox(0, 0, 300, 140);
+    var text = draw.text(function (add) {
+      add.tspan(input.value);
+    });
+    let textPath = text.path("M10 80 C 40 10, 65 10, 95 80 S 150 150, 180 80");
+    textPath
+      .animate({ duration: 1000, ease: "<>" })
+      .plot("M10 80 C 40 150, 65 150, 95 80 S 150 10, 180 80")
+      .loop(1000, true);
+    input.addEventListener("keyup", this.updateText(textPath, input));
+  }
+
+  updateText(textPath: any, input: any) {
+    return function () {
+      textPath.tspan(input.value);
+    };
+  }
+
   componentDidMount() {
+    /**
+     * svg
+     */
+    this.initSvg(); // base svg
+    // this.animateSvg(); //svg 动画
+
+    /**
+     * canvas
+     */
     const isCanvas = this.initCanvas();
     if (isCanvas) {
-      // this.drawRectangle();// 绘图
-      // this.drawPath();// 绘制路径
+      // this.drawRectangle(); // 绘图
+      this.drawPath(); // 绘制路径
       this.drawPathAvatar();
       return;
     }
@@ -82,6 +150,14 @@ export default class About extends Component<{}, IState> {
     return (
       <div id='About'>
         <canvas id='canvas' width='600' height='300'></canvas>
+        <div id='draw'></div>
+        <section id='drawing'>
+          <input
+            type='text'
+            defaultValue='Dragon----- - - - ->'
+            placeholder='Type text here...'
+          />
+        </section>
       </div>
     );
   }

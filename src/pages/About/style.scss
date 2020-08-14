@@ -1,9 +1,25 @@
+%wh {
+  width: 25vw;
+  height: 25vh;
+}
 #About {
+  @extend %flex-layout;
   width: 100vw;
   height: 100vh;
   box-sizing: border-box;
-}
-
-#About #canvas {
-  border: 2px solid red;
+  justify-content: space-around;
+  #canvas {
+    border: 1px solid;
+  }
+  #draw {
+    @extend %wh;
+    @extend %flex-layout;
+    border: 2px solid green;
+  }
+  #drawing {
+    @extend %wh;
+    @extend %flex-layout;
+    flex-direction: column;
+    border: 2px solid red;
+  }
 }
