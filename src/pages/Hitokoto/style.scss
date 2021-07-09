@@ -3,6 +3,8 @@
   @extend %flex-layout;
   background: url("../../assets/img/background.jpg") no-repeat;
   background-size: 100% 100%;
+  box-sizing: border-box;
+
   .box {
     color: $black;
     padding: 20px;
@@ -10,16 +12,20 @@
     transition: all 1s;
     background-color: rgba(255, 255, 255, 0.8);
     box-shadow: 2px 2px 2px 0 rgba(0, 0, 0, 0.4);
+
     &:hover {
       color: $main-color;
     }
+
     &:hover .author {
       color: $main-color;
     }
   }
+
   .bracket {
     font-size: 30px;
   }
+
   .word {
     margin: 0;
     font-size: 30px;
@@ -29,12 +35,14 @@
     font-weight: bold;
     padding: 15px 50px;
     position: relative;
+
     &::after {
       content: "『";
       position: absolute;
       top: 0;
       left: 0;
     }
+
     &::before {
       content: "』";
       position: absolute;
@@ -42,6 +50,7 @@
       bottom: 0;
     }
   }
+
   .author {
     font-size: 20px;
     color: $black;

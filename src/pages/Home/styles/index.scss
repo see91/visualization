@@ -1,0 +1,25 @@
+#home {
+  @extend %flex-layout;
+  height: 100vh;
+  user-select: none;
+  position: relative;
+  box-sizing: border-box;
+  align-items: flex-start;
+
+  .h-t {
+    position: absolute;
+    z-index: 2;
+    @extend %flex-layout;
+    justify-content: space-between;
+    box-shadow: rgba(12, 20, 28, 0.5) -5px 5px 10px 3px;
+
+    .h-t-l {
+      margin: 0 20px;
+    }
+  }
+
+  .main {
+    position: absolute;
+    box-sizing: border-box;
+  }
+}
